@@ -7,7 +7,7 @@ import FilterButton from "./FilterButton";
 import BadgeFilter from "./BadgeFilter";
 import { getCharacters } from "../services/apiService";
 
-const ContentPersonajes = () => {
+const ContentPersonajes = ({ searchTerm }) => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,12 +16,14 @@ const ContentPersonajes = () => {
   const [filter, setFilter] = useState("Todos")
 
   const activeFilters = Object.entries(appliedFilters)
-    .filter(([_, value]) => value.trim()) // Ignora filtros vacíos
+    // eslint-disable-next-line
+    .filter(([i, value]) => value.trim())
     .map(([key, value]) => `${key}: ${value}`); // Formato "status: Alive"
 
 
   const filteredCharacters = (characters || []).filter((character) => {
     return (
+      (character.name.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (!appliedFilters.status || character.status === appliedFilters.status) &&
       (!appliedFilters.species || character.species === appliedFilters.species) &&
       (!appliedFilters.gender || character.gender === appliedFilters.gender)
@@ -84,7 +86,7 @@ const ContentPersonajes = () => {
 };
 
 ContentPersonajes.propTypes = {
-  characters: PropTypes.node,
+  searchTerm: PropTypes.string.isRequired,
 };
 
 export default ContentPersonajes;

@@ -63,7 +63,7 @@ const FilterModal = ({ onClose, appliedFilters, setAppliedFilters }) => {
           <div className="flex flex-col gap-3">
             <div className="text-sm font-medium">Género</div>
             <div className="flex gap-3">
-              {["Male", "Female", "Unknown"].map((gender) => (
+              {["Male", "Female", "unknown"].map((gender) => (
                 <button
                   key={gender}
                   className={`py-1 px-3 rounded-2xl border ${filters.gender === gender ? "bg-green-400 text-white" : "border-gray-400 text-gray-600"
@@ -80,7 +80,7 @@ const FilterModal = ({ onClose, appliedFilters, setAppliedFilters }) => {
           <div className="flex flex-col gap-3">
             <div className="text-sm font-medium">Estado</div>
             <div className="flex gap-3">
-              {["Alive", "Dead", "Unknown"].map((status) => (
+              {["Alive", "Dead", "unknown"].map((status) => (
                 <button
                   key={status}
                   className={`py-1 px-3 rounded-2xl border ${filters.status === status ? "bg-green-400 text-white" : "border-gray-400 text-gray-600"
