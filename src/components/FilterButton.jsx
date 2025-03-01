@@ -1,8 +1,20 @@
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 
-const FilterButton = ({ onClick }) => {
+import FilterModal from "../components/modals/FilterModal"; // Importa el modal
+
+const FilterButton = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    console.log("El estado del modal cambió:", isOpen);
+  }, [isOpen]);
+
   return (
-    <div data-svg-wrapper className="cursor-pointer" onClick={onClick}>
+    <div
+      data-svg-wrapper
+      className="cursor-pointer"
+      onClick={() => setIsOpen(true)}
+    >
       <svg
         width="44"
         height="44"
@@ -19,12 +31,9 @@ const FilterButton = ({ onClick }) => {
           fill="#808C73"
         />
       </svg>
+      {isOpen && <FilterModal onClose={() => setIsOpen(false)} />}
     </div>
   );
-};
-
-FilterButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
 };
 
 export default FilterButton;
