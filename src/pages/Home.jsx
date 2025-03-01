@@ -1,3 +1,4 @@
+import logo from "../assets/images/logo.png";
 
 const Home = () => {
   return (
@@ -6,7 +7,7 @@ const Home = () => {
       <div className="relative z-10 flex justify-center items-center w-full max-w-[500px]">
         <img
           className="w-full max-w-[80%] sm:max-w-[400px] md:max-w-[500px] h-auto"
-          src="src/assets/images/logo.png"
+          src={logo}
           alt="Rick and Morty Logo"
         />
       </div>
