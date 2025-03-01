@@ -34,18 +34,29 @@ function PWABadge() {
   }
 
   return (
-    <div className="PWABadge" role="alert" aria-labelledby="toast-message">
-      { (offlineReady || needRefresh)
-      && (
-        <div className="PWABadge-toast">
-          <div className="PWABadge-message">
-            { offlineReady
-              ? <span id="toast-message">App ready to work offline</span>
-              : <span id="toast-message">New content available, click on reload button to update.</span>}
-          </div>
-          <div className="PWABadge-buttons">
-            { needRefresh && <button className="PWABadge-toast-button" onClick={() => updateServiceWorker(true)}>Reload</button> }
-            <button className="PWABadge-toast-button" onClick={() => close()}>Close</button>
+    <div role="alert" aria-labelledby="toast-message">
+      {(offlineReady || needRefresh) && (
+        <div className="fixed bottom-5 right-5 bg-black text-white p-4 rounded-xl shadow-lg border border-green-400">
+          <p id="toast-message" className="text-lg font-bold text-green-400">
+            {offlineReady
+              ? "¡App lista para usarse sin conexión!"
+              : "Nuevo contenido disponible. Recarga para actualizar."}
+          </p>
+          <div className="mt-3 flex gap-3">
+            {needRefresh && (
+              <button
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition"
+                onClick={() => updateServiceWorker(true)}
+              >
+                Recargar
+              </button>
+            )}
+            <button
+              className="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded-lg transition"
+              onClick={() => close()}
+            >
+              Cerrar
+            </button>
           </div>
         </div>
       )}
