@@ -14,7 +14,7 @@ const ContentPersonajes = ({ characters }) => {
   );
 
   return (
-    <div className="p-6 bg-gray-300 min-h-screen">
+    <div className="p-6 bg-gray-300">
       <div className="max-w-screen-xl mx-auto px-4 md:px-[200px]">
         {/* Fila de filtros y botón */}
         <div className="flex justify-between items-center mb-8">

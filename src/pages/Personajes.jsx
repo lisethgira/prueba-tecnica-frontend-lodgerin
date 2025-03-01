@@ -5,10 +5,9 @@ import Header from "../components/Header";
 const Personajes = () => {
   return (
     <>
-      <Header></Header>
-
-      <ContentPersonajes></ContentPersonajes>
-      <Footer></Footer>
+      <Header/>
+      <ContentPersonajes/>
+      <Footer/>
     </>
   );
 };

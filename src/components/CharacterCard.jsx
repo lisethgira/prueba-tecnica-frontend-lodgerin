@@ -18,7 +18,13 @@ const CharacterCard = ({ character }) => {
 };
 
 CharacterCard.propTypes = {
-  character: PropTypes.node,
+  character: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default CharacterCard;
+

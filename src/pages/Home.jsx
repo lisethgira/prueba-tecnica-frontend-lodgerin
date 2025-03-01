@@ -14,19 +14,19 @@ const Home = () => {
       </div>
 
       {/* Título */}
-      <div className="relative z-10 text-center text-white text-2xl sm:text-3xl md:text-4xl font-bold font-['Montserrat']">
+      <div className="relative z-10 text-center text-white text-2xl sm:text-3xl md:text-4xl font-bold">
         Bienvenido a Rick and Morty
       </div>
 
       {/* Descripción */}
-      <div className="relative z-10 text-center text-neutral-50 text-sm sm:text-base md:text-lg font-semibold font-['Montserrat'] leading-relaxed sm:leading-loose max-w-[90%] md:max-w-[600px]">
+      <div className="relative z-10 text-center text-neutral-50 text-sm sm:text-base md:text-lg font-semibold leading-relaxed sm:leading-loose max-w-[90%] md:max-w-[600px]">
         En esta prueba, evaluaremos su capacidad para construir la aplicación mediante el análisis de código y la reproducción del siguiente diseño.
       </div>
 
       {/* Botón */}
       <Link
         to="/personajes"
-        className="relative z-10 bg-[#8bc547] rounded-full px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 text-[#354d18] text-sm sm:text-base font-bold font-['Montserrat'] leading-tight shadow-lg hover:bg-[#7cb342] transition"
+        className="relative z-10 bg-[#8bc547] rounded-full px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 text-[#354d18] text-sm sm:text-base font-bold  leading-tight shadow-lg hover:bg-[#7cb342] transition"
       >
         Comenzar
       </Link>

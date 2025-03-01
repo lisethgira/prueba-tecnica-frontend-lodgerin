@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
+import errorImage from "../assets/images/error404.jpg"; // Asegúrate de que la ruta sea correcta
 
 const NotFound = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-8xl font-bold text-blue-600">404</h1>
-      <p className="text-2xl text-gray-700 mt-4">Página no encontrada</p>
-      <p className="text-gray-500 mt-2">Lo sentimos, no pudimos encontrar la página que buscas.</p>
-      <Link to="/" className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition">
+    <div className="flex flex-col items-center justify-center h-screen bg-black text-white text-center p-6">
+      <img src={errorImage} alt="Error 404" className="w-150 mb-2" />
+      
+      <p className="text-2xl text-yellow-300 mt-4">Página no encontrada</p>
+      <p className="text-gray-400 mt-2">Lo sentimos, no pudimos encontrar la página que buscas.</p>
+      <Link
+        to="/"
+        className="mt-6 px-6 py-3 bg-green-500 text-black font-bold rounded-lg shadow-lg hover:bg-green-600 transition"
+      >
         Volver al inicio
       </Link>
     </div>
@@ -14,3 +19,4 @@ const NotFound = () => {
 };
 
 export default NotFound;
+
