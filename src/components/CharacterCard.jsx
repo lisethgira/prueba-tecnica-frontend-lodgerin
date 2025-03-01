@@ -3,47 +3,50 @@ import PropTypes from "prop-types";
 const CharacterCard = ({ character }) => {
   console.log("Personajes a renderizar:", character);
   return (
-    <div className="w-[400px] h-[150px] bg-[#1E1E1E] rounded-xl flex overflow-hidden shadow-lg">
+    <div className="w-full max-w-[420px] bg-neutral-50 rounded-xl flex flex-col md:flex-row overflow-hidden shadow-md">
       {/* Imagen del personaje */}
-      <div className="w-[137px] h-[150px] flex-shrink-0">
+      <div className="w-full md:w-[137px] h-[180px] md:h-full flex items-center">
         <img
           className="w-full h-full object-cover"
           src={character.image}
           alt={character.name}
         />
       </div>
-      
-      {/* Contenido del personaje */}
-      <div className="flex-1 p-4 flex flex-col justify-between">
-        <div>
-          <h3 className="text-[#97ce4c] text-lg font-semibold">{character.name}</h3>
-          <p className="text-gray-400 text-sm">{character.species}</p>
-        </div>
-        
-        {/* Información adicional */}
-        <div className="flex justify-between items-center text-gray-300 text-xs">
-          <div>
-            <p className="font-bold text-[#808c72]">Last known location</p>
-            <p>{character.location?.name || "Unknown"}</p>
-          </div>
-          <div>
-            <p className="font-bold text-[#808c72]">First seen in</p>
-            <p>{character.origin?.name || "Unknown"}</p>
-          </div>
-        </div>
-      </div>
 
-      {/* Estado del personaje */}
-      <div className="flex items-center justify-center w-[44px] h-[44px] m-2 bg-[#FAFAFA] rounded-full">
-        <span
-          className={`w-3 h-3 rounded-full ${
-            character.status === "Alive"
-              ? "bg-green-500"
-              : character.status === "Dead"
-              ? "bg-red-500"
-              : "bg-gray-500"
-          }`}
-        ></span>
+      {/* Contenido de la tarjeta */}
+      <div className="flex flex-col flex-1 p-4 justify-between">
+        {/* Nombre y estado */}
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-semibold text-[#333530]">
+            {character.name.split(" ").slice(0, 2).join(" ")}
+          </h3>
+          <div className="bg-[#e6f2d8] rounded-2xl px-3 py-1 flex items-center gap-1">
+            <span className="text-[#354d18] text-sm font-medium">
+              ✅ {character.status}
+            </span>
+          </div>
+        </div>
+
+        {/* Especie */}
+        <p className="text-[#565b52] text-sm font-medium">
+          {character.species}
+        </p>
+
+        {/* Ubicación y primer episodio */}
+        <div className="flex flex-col md:flex-row justify-between text-sm gap-2">
+          <div>
+            <p className="text-[#808c72] font-bold">Last known location</p>
+            <p className="text-[#565b52] font-medium">
+              {character.location.name}
+            </p>
+          </div>
+          <div>
+            <p className="text-[#808c72] font-bold">First seen in</p>
+            <p className="text-[#565b52] font-medium">
+              {character.origin.name}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -56,15 +59,9 @@ CharacterCard.propTypes = {
     status: PropTypes.string.isRequired,
     species: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-    origin: PropTypes.shape({
-      name: PropTypes.string,
-    }),
+    location: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
+    origin: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
   }).isRequired,
 };
 
 export default CharacterCard;
-
-
