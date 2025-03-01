@@ -1,4 +1,3 @@
-import Button from "../components/Button";
 
 const Home = () => {
   return (
@@ -23,9 +22,9 @@ const Home = () => {
       </div>
 
       {/* Botón */}
-      <Button className="relative z-10 bg-[#8bc547] rounded-full px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 text-[#354d18] text-sm sm:text-base font-bold font-['Montserrat'] leading-tight shadow-lg hover:bg-[#7cb342] transition">
+      <button className="relative z-10 bg-[#8bc547] rounded-full px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 text-[#354d18] text-sm sm:text-base font-bold font-['Montserrat'] leading-tight shadow-lg hover:bg-[#7cb342] transition">
         Comenzar
-      </Button>
+      </button>
     </main>
   );
 };
