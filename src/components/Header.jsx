@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import logo from "../assets/images/logo.png";
 
 const Header = ({ children }) => {
   return (
@@ -12,7 +13,7 @@ const Header = ({ children }) => {
       <div className="relative z-10 flex flex-col items-center gap-6 md:gap-12 w-full">
         {/* Logo */}
         <div className="w-full max-w-[273px] h-24 flex justify-center items-center">
-          <img className="w-full h-auto" src="src/assets/images/logo.png" alt="Logo" />
+          <img className="w-full h-auto" src={logo} alt="Logo" />
         </div>
 
         {/* Barra de búsqueda */}
