@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const CharacterCard = ({ character }) => {
-  console.log("Personajes a renderizar:", character);
+  // console.log("Personajes a renderizar:", character);
   return (
     <div className="w-full max-w-[420px] bg-neutral-50 rounded-xl flex flex-col md:flex-row overflow-hidden shadow-md">
       {/* Imagen del personaje */}

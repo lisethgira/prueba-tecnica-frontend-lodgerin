@@ -1,17 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import FilterTabs from "./FilterTabs";
 import CharacterList from "./CharacterList";
 import FilterButton from "./FilterButton";
 import BadgeFilter from "./BadgeFilter";
+import { getCharacters } from "../services/apiService";
 
-const ContentPersonajes = ({ characters }) => {
-  const [selectedFilter, setSelectedFilter] = useState("Todos");
+const ContentPersonajes = () => {
+  const [characters, setCharacters] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredCharacters = (characters || []).filter((character) =>
-    selectedFilter === "Todos" ? true : character.status === selectedFilter
-  );
+  const [appliedFilters, setAppliedFilters] = useState({ status: "", species: "", gender: "" });
+
+  const [filter, setFilter] = useState("Todos")
+
+  const activeFilters = Object.entries(appliedFilters)
+    .filter(([_, value]) => value.trim()) // Ignora filtros vacíos
+    .map(([key, value]) => `${key}: ${value}`); // Formato "status: Alive"
+
+
+  const filteredCharacters = (characters || []).filter((character) => {
+    return (
+      (!appliedFilters.status || character.status === appliedFilters.status) &&
+      (!appliedFilters.species || character.species === appliedFilters.species) &&
+      (!appliedFilters.gender || character.gender === appliedFilters.gender)
+    );
+  });
+
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      const data = await getCharacters();
+      console.log("Personajes obtenidos:", data); // 🔍 Verifica qué devuelve la API
+      setCharacters(data.results || []); // 👈 Asegúrate de acceder a `results`
+      setLoading(false);
+    };
+    fetchCharacters();
+  }, []);
+
+  if (loading) {
+    return <p className="text-center text-gray-600">Cargando personajes...</p>;
+  }
 
   return (
     <div className="p-6 bg-gray-300">
@@ -19,11 +48,14 @@ const ContentPersonajes = ({ characters }) => {
         {/* Fila de filtros y botón */}
         <div className="flex justify-between items-center mb-8">
           <FilterTabs
-            selectedFilter={selectedFilter}
-            setSelectedFilter={setSelectedFilter}
+            selectedFilter={filter}
+            setSelectedFilter={setFilter}
           />
           <div className="flex justify-end w-full max-w-[200px]">
-            <FilterButton />
+            <FilterButton
+              appliedFilters={appliedFilters}
+              setAppliedFilters={setAppliedFilters}
+            />
           </div>
         </div>
 
@@ -39,9 +71,13 @@ const ContentPersonajes = ({ characters }) => {
           </p>
         </div>
 
-        <BadgeFilter></BadgeFilter>
+        {activeFilters.length > 0 ? (
+          activeFilters.map((filter, index) => <BadgeFilter key={index} label={filter} />)
+        ) : (
+          <BadgeFilter label="Sin filtros" />
+        )}
 
-        <CharacterList characters={filteredCharacters} />
+        <CharacterList characters={filteredCharacters} setAppliedFilters={setAppliedFilters} />
       </div>
     </div>
   );
