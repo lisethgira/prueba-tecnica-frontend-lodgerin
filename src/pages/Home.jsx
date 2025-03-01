@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 
 const Home = () => {
@@ -23,9 +24,12 @@ const Home = () => {
       </div>
 
       {/* Botón */}
-      <button className="relative z-10 bg-[#8bc547] rounded-full px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 text-[#354d18] text-sm sm:text-base font-bold font-['Montserrat'] leading-tight shadow-lg hover:bg-[#7cb342] transition">
+      <Link
+        to="/personajes"
+        className="relative z-10 bg-[#8bc547] rounded-full px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 text-[#354d18] text-sm sm:text-base font-bold font-['Montserrat'] leading-tight shadow-lg hover:bg-[#7cb342] transition"
+      >
         Comenzar
-      </button>
+      </Link>
     </main>
   );
 };
