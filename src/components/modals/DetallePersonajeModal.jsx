@@ -1,8 +1,27 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { X } from "lucide-react";
 import banner from "../../assets/images/headermodal.jpg";
+import { getEpisodeById } from "../../services/apiService";
 
 const DetallePersonajeModal = ({ character, onClose }) => {
+  const [episode, setEpisode] = useState([])
+
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      const episodesData = await Promise.all(
+        character.episode.slice(0, 5).map(async (c) => {
+          const data = await getEpisodeById(c.split("/").pop());
+          console.log(data);
+          return data; // Retornar el resultado
+        })
+      );
+      setEpisode(episodesData); // Actualizar el estado con todos los episodios obtenidos
+    };
+
+    fetchCharacters();
+  }, [character]);
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
       <div className=" bg-gray-300 rounded-2xl shadow-lg w-full max-w-lg md:max-w-2xl relative">
@@ -56,13 +75,12 @@ const DetallePersonajeModal = ({ character, onClose }) => {
                 <div>
                   <p className="text-gray-500 text-sm font-semibold">Estado</p>
                   <span
-                    className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                      character.status === "Alive"
-                        ? "bg-green-100 text-green-800"
-                        : character.status === "Dead"
+                    className={`px-3 py-1 rounded-full text-sm font-semibold ${character.status === "Alive"
+                      ? "bg-green-100 text-green-800"
+                      : character.status === "Dead"
                         ? "bg-red-100 text-red-800"
                         : "bg-gray-100 text-gray-800"
-                    }`}
+                      }`}
                   >
                     {character.status}
                   </span>
@@ -74,12 +92,12 @@ const DetallePersonajeModal = ({ character, onClose }) => {
             <div className="bg-white col-span-2 p-4 rounded-lg shadow">
               <h3 className="font-bold text-lg mb-2">Episodios</h3>
               <ul className="mt-2 space-y-2">
-                {character.episodes?.slice(0, 5).map((episode, index) => (
+                {episode.map((episode, index) => (
                   <li
                     key={index}
                     className="flex justify-between bg-gray-100 p-2 rounded-lg text-sm"
                   >
-                    <span className="text-gray-700">{episode.code}</span>
+                    <span className="text-gray-700">{episode.episode}</span>
                     <span className="text-gray-500">{episode.name}</span>
                   </li>
                 ))}

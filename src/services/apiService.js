@@ -68,3 +68,18 @@ export const getEpisodes = async (page = 1) => {
     throw error;
   }
 };
+
+/**
+ * Obtiene los detalles de un personaje por ID.
+ * @param {number} id ID del personaje.
+ * @returns {Promise} Datos del personaje.
+ */
+export const getEpisodeById = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/episode/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error al obtener el personaje ${id}:`, error);
+    throw error;
+  }
+};

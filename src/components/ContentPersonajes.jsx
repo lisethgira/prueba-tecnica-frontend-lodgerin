@@ -41,10 +41,6 @@ const ContentPersonajes = ({ searchTerm }) => {
     fetchCharacters();
   }, []);
 
-  useEffect(() => {
-    console.log();
-  }, [])
-
   if (loading) {
     return <p className="text-center text-gray-600">Cargando personajes...</p>;
   }
