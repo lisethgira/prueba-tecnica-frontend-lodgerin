@@ -1,10 +1,36 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
-const FavoriteButton = () => {
+const FavoriteButton = ({ character, setFavCharacters }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
+  // Verificar si el personaje ya está en favoritos al montar el componente
+  useEffect(() => {
+    const storedFavs = JSON.parse(localStorage.getItem("favCharacters")) || [];
+    setIsFavorite(storedFavs.some((item) => item.id === character.id));
+  }, [character.id]);
+
   const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+    setFavCharacters((prev) => {
+      const exists = prev.some((item) => item.id === character.id);
+
+      let newCharacters;
+      if (exists) {
+        // Si ya está, lo eliminamos del array
+        newCharacters = prev.filter((item) => item.id !== character.id);
+      } else {
+        // Si no está, lo agregamos
+        newCharacters = [...prev, { ...character, favorite: true }];
+      }
+
+      // Guardamos en localStorage
+      localStorage.setItem("favCharacters", JSON.stringify(newCharacters));
+
+      // Actualizamos el estado local
+      setIsFavorite(!exists);
+
+      return newCharacters;
+    });
   };
 
   return (
@@ -29,6 +55,11 @@ const FavoriteButton = () => {
       </svg>
     </div>
   );
+};
+
+FavoriteButton.propTypes = {
+  character: PropTypes.object.isRequired,
+  setFavCharacters: PropTypes.func.isRequired
 };
 
 export default FavoriteButton;

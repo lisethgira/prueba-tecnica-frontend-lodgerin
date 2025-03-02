@@ -9,6 +9,7 @@ import { getCharacters } from "../services/apiService";
 
 const ContentPersonajes = ({ searchTerm }) => {
   const [characters, setCharacters] = useState([]);
+  const [favCharacters, setFavCharacters] = useState(JSON.parse(localStorage.getItem("favCharacters")) || [])
   const [loading, setLoading] = useState(true);
 
   const [appliedFilters, setAppliedFilters] = useState({ status: "", species: "", gender: "" });
@@ -39,6 +40,10 @@ const ContentPersonajes = ({ searchTerm }) => {
     };
     fetchCharacters();
   }, []);
+
+  useEffect(() => {
+    console.log();
+  }, [])
 
   if (loading) {
     return <p className="text-center text-gray-600">Cargando personajes...</p>;
@@ -79,7 +84,11 @@ const ContentPersonajes = ({ searchTerm }) => {
           <BadgeFilter label="Sin filtros" />
         )}
 
-        <CharacterList characters={filteredCharacters} setAppliedFilters={setAppliedFilters} />
+        <CharacterList
+          characters={filter === "Favoritos" ? favCharacters : filteredCharacters}
+          setAppliedFilters={setAppliedFilters}
+          setFavCharacters={setFavCharacters}
+        />
       </div>
     </div>
   );
