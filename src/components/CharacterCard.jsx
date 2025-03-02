@@ -1,11 +1,17 @@
 import PropTypes from "prop-types";
+import FavoriteButton from "./FavoriteButton";
 
 const CharacterCard = ({ character }) => {
   // console.log("Personajes a renderizar:", character);
   return (
-    <div className="w-full max-w-[420px] bg-neutral-50 rounded-xl flex flex-col md:flex-row overflow-hidden shadow-md">
+    <div className="w-full max-w-[420px] bg-neutral-50 rounded-xl flex flex-col md:flex-row overflow-hidden shadow-md relative">
       {/* Imagen del personaje */}
-      <div className="w-full md:w-[137px] h-[180px] md:h-full flex items-center">
+      <div className="w-full md:w-[137px] h-[180px] md:h-full flex items-center relative">
+        {/* Botón favorito */}
+        <div className="absolute top-0 right-0 md:left-0 md:right-auto p-2">
+          <FavoriteButton />
+        </div>
+
         <img
           className="w-full h-full object-cover"
           src={character.image}
@@ -20,9 +26,22 @@ const CharacterCard = ({ character }) => {
           <h3 className="text-lg font-semibold text-[#333530]">
             {character.name.split(" ").slice(0, 2).join(" ")}
           </h3>
-          <div className="bg-[#e6f2d8] rounded-2xl px-3 py-1 flex items-center gap-1">
-            <span className="text-[#354d18] text-sm font-medium">
-              ✅ {character.status}
+          <div
+            className={`rounded-2xl px-3 py-1 flex items-center gap-1 ${
+              character.status === "Alive"
+                ? "bg-green-100 text-green-800"
+                : character.status === "Dead"
+                ? "bg-red-100 text-red-800"
+                : "bg-gray-100 text-gray-800"
+            }`}
+          >
+            <span className="text-sm font-medium">
+              {character.status === "Alive"
+                ? "✅"
+                : character.status === "Dead"
+                ? "☠️"
+                : "❓"}{" "}
+              {character.status}
             </span>
           </div>
         </div>

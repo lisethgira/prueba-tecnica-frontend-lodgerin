@@ -28,7 +28,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
               <input
                 type="text"
                 placeholder="Buscar personaje por nombre"
-                className="ml-3 flex-1 bg-transparent text-[#e5e7e3] outline-none placeholder-[#b0b3af] text-sm md:text-base"
+                className="w-full ml-3 flex-1 bg-transparent text-[#e5e7e3] outline-none placeholder-[#b0b3af] text-sm md:text-base"
                 value={searchTerm}
                 onChange={(e) => { setSearchTerm(e.target.value) }}
               />
