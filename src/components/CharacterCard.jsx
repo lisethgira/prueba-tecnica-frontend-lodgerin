@@ -1,10 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import FavoriteButton from "./FavoriteButton";
 import DetallePersonajeModal from "./modals/DetallePersonajeModal";
 
 const CharacterCard = ({ character, setFavCharacters }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (window.innerWidth >= 768) {
+      setIsOpen(true); // Pantallas grandes: abrir modal
+    } else {
+      navigate(`/character/${character.id}`); // Pantallas pequeñas: navegar a la página de detalles
+    }
+  };
 
   // console.log("Personajes a renderizar:", character);
   return (
@@ -30,7 +41,7 @@ const CharacterCard = ({ character, setFavCharacters }) => {
         {/* Contenido de la tarjeta */}
         <div
           className="cursor-pointer flex flex-col flex-1 p-4 justify-between"
-          onClick={() => setIsOpen(true)}
+          onClick={handleClick}
         >
           {/* Nombre y estado */}
           <div className="flex justify-between items-center">
